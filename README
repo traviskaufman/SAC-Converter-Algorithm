@@ -4,7 +4,7 @@
 * Version: 1.0.0                         *
 ******************************************
 
-Today I reviewed Successive Approximation Digital to Analog Conversion, and after starting to learn my stuff with data structures I decided it would be cool to try and implement the Successive approximation algorithm in C++, since 1) C++ is really awesome, 2) I have a hunch I can get this bad boy to run in O(log n) time,  and 3) I am literally the biggest nerd on the planet. Therefore, here's my attempt at it. The algorithm is as follows:
+Today I reviewed Successive Approximation Digital to Analog Conversion, and after starting to learn my stuff with data structures I decided it would be cool to try and implement the Successive approximation algorithm in C, since 1) C is really awesome, 2) I have a hunch I can get this bad boy to run in O(log n) time,  and 3) I am literally the biggest nerd on the planet. Therefore, here's my attempt at it. The algorithm is as follows:
 
 1) Flip the MSB of the potential output word 
 2) If the output word's value is larger than the reference voltage, flip the MSB back and repeat 1) with the next-most significant bit
