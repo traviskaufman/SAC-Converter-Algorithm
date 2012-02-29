@@ -6,7 +6,11 @@
  *
  * @author: Travis Kaufman
  *
- * @version: 1.0.0
+ * @version: 1.0.1
+ *
+ * Changes: Made it so that instead of the running time being approx 
+ * O(wordLength), it's now O(SigDig), where SigDig is the minimum number
+ * of significant digits needed to represent vRef
  */
 
 // TODO: Make more bulletproof
@@ -16,6 +20,7 @@
 #include <math.h>
 
 int approximate(const int vRef, const int wordLength);
+unsigned short int SigDig (int b, int num);
 int main(int argc, const char* argv[]) {
 	const int vRef = (argc >= 2) ? atoi(argv[1]) : 10;
 	const int wL = (argc == 3) ? atoi(argv[2]) : 4;
@@ -35,13 +40,13 @@ int approximate(const int vRef, const int wordLength) {
 		return -1;
 	}
 
-	int appr = 0, msb = wordLength - 1;
+	int appr = 0;
+	unsigned short int msb = SigDig(2, vRef);
+	if (msb < wordLength)
+		printf("%i bits unecessary, decrementing the word length to %i bits\n", wordLength, msb);
 	int count = 0;
-	while (appr != wordLength) {
-		// make sure the lsb has a value of 1
-		/*if (appr == 0 || appr % 2 == 0)
-			appr++;*/
-		// shift it to the next-most significant bit
+	while (appr != vRef) {
+		// Flip the msb
 		appr += pow(2,msb);
 		printf("appr = %i\n", appr);
 		if (appr < vRef)
@@ -49,16 +54,14 @@ int approximate(const int vRef, const int wordLength) {
 		else if (appr > vRef) {
 			appr -= pow(2,msb);
 			msb--;
-		} 
-		else // they are equal
-			break;
+		}
 		count++;
 	} // end while
 	printf("Performed %i approximations\n", count);
 	return appr;
 } // end approximate();
 
-unsigned short int SigDig (Base b, RepNum num) {
+unsigned short int SigDig (int b, int num) {
 	double n;
 	if (num == 0)
 		n = 1;

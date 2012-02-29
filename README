@@ -1,10 +1,12 @@
 ******************************************
 * Successive Approximation ADC Algorithm *
 * Author: Travis Kaufman                 *
-* Version: 1.0.0                         *
+* Version: 1.0.1                         *
 ******************************************
 
-Today I reviewed Successive Approximation Digital to Analog Conversion, and after starting to learn my stuff with data structures I decided it would be cool to try and implement the Successive approximation algorithm in C, since 1) C is really awesome, 2) I have a hunch I can get this bad boy to run in O(log n) time,  and 3) I am literally the biggest nerd on the planet. Therefore, here's my attempt at it. The algorithm is as follows:
+UPDATE NOTE: When I tested my original programs output, I saw that the running time was approximately O(n), where n = word length. However, I was able to get this to run more efficiently than I thought, by checking if the word length was excessive and if so resizing it, therefore not avoiding wasting processor time on unecessary operations. Although this isn't exactly how a SAC works, I would rather have efficiency over real-world roadblocks. Furthermore, in terms of n = number being tested, it is WAY more efficient than a brute-force algorithm. Probably why it's used in ADCs ;)
+
+Today I reviewed Successive Approximation Digital to Analog Conversion, and after starting to learn my stuff with data structures I decided it would be cool to try and implement the Successive approximation algorithm in C, since 1) C is really awesome, and 2) I am literally the biggest nerd on the planet. Therefore, here's my attempt at it. The algorithm is as follows:
 
 1) Flip the MSB of the potential output word 
 2) If the output word's value is larger than the reference voltage, flip the MSB back and repeat 1) with the next-most significant bit
